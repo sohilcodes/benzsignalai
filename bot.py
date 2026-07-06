@@ -18,7 +18,7 @@ def run_flask():
 # Settings
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')
-IMAGE_URL = 'https://t.me/SohilCodes/3896' # Aapka image link
+IMAGE_URL = 'https://t.me/SohilCodes/3896'
 IST = pytz.timezone('Asia/Kolkata')
 
 PAIRS = [
@@ -36,20 +36,20 @@ async def send_signal():
         entry_time = (now + timedelta(minutes=1)).strftime('%H:%M')
         expiry_time = (now + timedelta(minutes=2)).strftime('%H:%M')
         
-        # Caption with details
-        msg = (f"🚀 SIGNAL ALERT (QUOTEX)\n\n"
-               f"📈 Pair: {pair}\n"
-               f"💰 Entry Price: Market Price\n"
-               f"🎯 Direction: CALL\n"
-               f"⏰ Timeframe: 1 Minute\n"
-               f"🕒 Entry Time: {entry_time} IST\n"
-               f"🏁 Expiry: {expiry_time} IST\n\n"
-               f"⚠️ Note: Trade for 1 minute only!")
+        # Premium Emoji Format
+        msg = (f"5188481279963715781 BENZ SIGNAL Ai ALERT (QUOTEX)\n\n"
+               f"5244837092042750681 Pair: {pair}\n"
+               f"5224257782013769471 Entry Price: Market Rate\n"
+               f"5449862290834735715 Direction: CALL\n"
+               f"5386367538735104399 Timeframe: 1 Minute\n"
+               f"5440621591387980068 Entry Time: {entry_time} IST\n"
+               f"5195458664789457954 Expiry: {expiry_time} IST\n\n"
+               f"6271786398404055377 Note: Trade for 1 minute only!")
         
-        # Image ke saath message bhej rahe hain
+        # Image ke saath send karo
         await bot.send_photo(chat_id=CHANNEL_ID, photo=IMAGE_URL, caption=msg)
         
-        # 2 minute ka wait (1m trade + 1m gap)
+        # 2 minute ka wait (1 min trade + 1 min gap)
         await asyncio.sleep(120) 
 
 async def main():
@@ -59,4 +59,3 @@ async def main():
 if __name__ == '__main__':
     Thread(target=run_flask).start()
     asyncio.run(main())
-    
