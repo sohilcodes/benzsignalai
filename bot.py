@@ -1,5 +1,4 @@
 import asyncio
-import yfinance as yf
 import os
 import telegram
 import pytz
@@ -19,9 +18,9 @@ def run_flask():
 # Settings
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')
+IMAGE_URL = 'https://t.me/SohilCodes/3896' # Aapka image link
 IST = pytz.timezone('Asia/Kolkata')
 
-# Saare pairs yahan list mein daal diye hain
 PAIRS = [
     "AUD/NZD (OTC)", "NZD/CAD (OTC)", "USD/BDT (OTC)", "USD/IDR (OTC)", 
     "EUR/NZD (OTC)", "NZD/USD (OTC)", "GBP/NZD (OTC)", "USD/NGN (OTC)", 
@@ -37,17 +36,20 @@ async def send_signal():
         entry_time = (now + timedelta(minutes=1)).strftime('%H:%M')
         expiry_time = (now + timedelta(minutes=2)).strftime('%H:%M')
         
+        # Caption with details
         msg = (f"🚀 SIGNAL ALERT (QUOTEX)\n\n"
                f"📈 Pair: {pair}\n"
-               f"💰 Entry Price: Data Unavailable (OTC)\n"
+               f"💰 Entry Price: Market Price\n"
                f"🎯 Direction: CALL\n"
                f"⏰ Timeframe: 1 Minute\n"
                f"🕒 Entry Time: {entry_time} IST\n"
                f"🏁 Expiry: {expiry_time} IST\n\n"
                f"⚠️ Note: Trade for 1 minute only!")
         
-        await bot.send_message(chat_id=CHANNEL_ID, text=msg)
-        # Har pair ke baad 2 minute ka gap (1m trade + 1m gap)
+        # Image ke saath message bhej rahe hain
+        await bot.send_photo(chat_id=CHANNEL_ID, photo=IMAGE_URL, caption=msg)
+        
+        # 2 minute ka wait (1m trade + 1m gap)
         await asyncio.sleep(120) 
 
 async def main():
@@ -57,4 +59,4 @@ async def main():
 if __name__ == '__main__':
     Thread(target=run_flask).start()
     asyncio.run(main())
-  
+    
